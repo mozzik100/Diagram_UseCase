@@ -1,0 +1,39 @@
+@startuml Diagram_UseCase
+left to right direction
+actor "Деканат"     as admin #white
+
+usecase (Формирование ведомости)               as FormingList            #white
+usecase (Выбор формы контроля)                 as ControlForm            #white
+usecase (Выбор дисциплины)                     as ChoiseDiscipline       #white
+usecase (Добавление студентов в ведомость)     as AddStudent             #white
+usecase (Выбор учебной группы)                 as ChoiseGroup            #white
+usecase (Указание семестра, даты)              as SpecifyData            #white
+usecase (Ввод оценок по ведомости)             as EnterEstimates         #white
+usecase (Заполнение справочника форм контроля) as ComplitionControlForms #white
+usecase (Заполнение справочника дисциплин)     as ComplitionDiscipline   #white
+usecase (Ввод информации о студентах)          as EnterStudentInfo       #white
+
+usecase (Хранение информации в архиве)         as StoringInfo            #white
+usecase (Перенос групп в архив)                as TransferingGroup       #white
+usecase (Перенос студентов в архив)            as TransferingStudents    #white
+usecase (Перенос оценок в архив)               as TransfetingEstimates   #white
+usecase (Восстановление информации из архива)  as RecoveryInfo           #white
+
+admin --> FormingList
+(FormingList) .-> (ControlForm):<include>
+(ControlForm) .-> (ComplitionControlForms):<extend>
+(FormingList) .-> (ChoiseDiscipline):<include>
+(ChoiseDiscipline) .-> (ComplitionDiscipline):<extend>
+(FormingList) .-> (AddStudent):<include>
+(AddStudent) .-> (EnterStudentInfo):<include>
+(FormingList) .-> (ChoiseGroup):<include>
+(FormingList) .-> (SpecifyData):<include>
+(FormingList) .-> (EnterEstimates):<include>
+
+admin --> StoringInfo
+(StoringInfo) .-> (TransferingGroup):<include>
+(StoringInfo) .-> (TransferingStudents):<include>
+(StoringInfo) .-> (TransfetingEstimates):<include>
+(StoringInfo) .-> (RecoveryInfo):<extend>
+
+@enduml
